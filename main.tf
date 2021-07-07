@@ -115,7 +115,7 @@ locals {
 }
 
 module "ecs_alb_service_task" {
-  source                            = "git::https://github.com/cloudposse/terraform-aws-ecs-alb-service-task.git?ref=tags/0.21.0"
+  source                            = "git::https://github.com/hawkup/terraform-aws-ecs-alb-service-task.git?ref=hawkup-patch-1"
   name                              = var.name
   namespace                         = var.namespace
   stage                             = var.stage
@@ -139,6 +139,7 @@ module "ecs_alb_service_task" {
   tags                              = var.tags
   volumes                           = var.volumes
   ecs_load_balancers                = local.load_balancers
+  ecs_depends_on                    = [module.alb_ingress]
 }
 
 # module "ecs_codepipeline" {
